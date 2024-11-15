@@ -1,46 +1,33 @@
 
+#include "Transaccion.h"
 #include<string>
 
-class Ingreso{
+class Ingreso: public Transaccion{
 
     private:
-        float ganancia;
-        std::string fuente;
+        std::string tipo_ingreso;
     
     public:
         Ingreso();
-        Ingreso(float, std::string);
-        void setFuente(std::string);
-        void setGanancia(float);
-        std::string getFuente();
-        float getGanancia();
+        Ingreso(float, std::string, std::string, std::string);
+        std::string getTipoIngreso();
+        void setTipoIngreso(std::string);
+        std::string reporte() override;
 
 };
 
-
+Ingreso::Ingreso(float m, std::string s, std::string d, std::string r) : Transaccion(m, s, d){
+    tipo_ingreso = r;
+}
 Ingreso::Ingreso(){
-    ganancia = 0.0;
-    fuente = "";
+    tipo_ingreso = "";
 }
-
-Ingreso::Ingreso(float f, std::string s){
-    ganancia = f;
-    fuente = s;
+std::string Ingreso::getTipoIngreso(){
+    return tipo_ingreso;
 }
-
-void Ingreso::setFuente(std::string f){
-    fuente = f;
+void Ingreso::setTipoIngreso(std::string b){
+    tipo_ingreso = b;
 }
-void Ingreso::setGanancia(float g){
-    ganancia = g;
+std::string Ingreso::reporte(){
+        return "Monto << "+std::to_string(monto) + "\nFecha << "+ fecha + "\nDescripcion << "+descripcion + "\nTipo de ingreso: << " + tipo_ingreso + "\n"; 
 }
-float Ingreso::getGanancia(){
-    return ganancia;
-}
-std::string Ingreso::getFuente(){
-    return fuente;
-}
-
-
-
-

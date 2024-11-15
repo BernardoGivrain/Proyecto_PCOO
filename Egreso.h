@@ -1,52 +1,34 @@
-
+#include "Transaccion.h"
 #include<string>
 
-class Egreso{
+class Egreso: public Transaccion{
 
     private:
-        float gasto;
-        std::string fuente;
-        bool fijo;
+        std::string  metodo_pago;
     
     public:
         Egreso();
-        Egreso(float, std::string, bool);
-        void setFuente(std::string);
-        void setGasto(float);
-        void setFijo(bool);
-        std::string getFuente();
-        float getGasto();
-        bool isFijo();
+        Egreso(float, std::string, std::string, std::string);
+        void setMetodoPago(std::string);
+        std::string getMetodoPago();
+        std::string reporte() override;
         
-
 };
 
 Egreso::Egreso(){
-    gasto = 0.0;
-    fuente = "";
-    fijo = false;
+    metodo_pago = "";
 }
-Egreso::Egreso(float f, std::string s, bool b){
-    gasto = f;
-    fuente = s;
-    fijo = b;
+Egreso::Egreso(float m, std::string s, std::string d, std::string r) : Transaccion(m, s, d){
+    metodo_pago = r;
 }
-void Egreso::setFuente(std::string f){
-    fuente = f;
+void Egreso::setMetodoPago(std::string e){
+    metodo_pago = e;
 }
-void Egreso::setGasto(float g){
-    gasto = g;
+std::string Egreso::getMetodoPago(){
+    return metodo_pago;
 }
-float Egreso::getGasto(){
-    return gasto;
+std::string Egreso::reporte(){
+        return "Monto << "+std::to_string(monto) + "\nFecha << "+ fecha + "\nDescripcion << "+descripcion + "\nDetalles de la transaccion: << " + metodo_pago + "\n"; 
 }
-std::string Egreso::getFuente(){
-    return fuente;
-}
-void Egreso::setFijo(bool b){
-    fijo = b;
-}
-bool Egreso::isFijo(){
-    return fijo;
-}
+
 

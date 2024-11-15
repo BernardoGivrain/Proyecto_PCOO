@@ -1,3 +1,6 @@
+
+#ifndef PRESUPUESTO_H_
+#define PRESUPUESTO_H_
 #include "Egreso.h"
 #include "Ingreso.h"
 #include <iostream>
@@ -6,121 +9,144 @@ const int MAX = 100;
 
 class Presupuesto{
     private:
+        std::string nombre_titular;
+        std::string banco;
+        std::string num_telefono;
         Egreso egresos[MAX];
         Ingreso ingresos[MAX];
-        int ctdEgresos = 0, ctdIngresos = 0;
-        float suma_ingresos = 0, suma_egresos = 0, egresos_siguiente_mes = 0;
-
-
-
+        int ctd_egresos = 0, ctd_ingresos = 0;
+        float suma_ingresos = 0, suma_egresos = 0;
     public:
-    //Default constructor
-        void insertarIngreso(float, std::string);
-        void insertarEgreso(float, std::string, bool);
+        Presupuesto();
+        Presupuesto(std::string nombre, std::string empresa, std::string telefono) : nombre_titular(nombre), banco(empresa), num_telefono(telefono){};
+        void setNombreTitular(std::string);
+        void setNumTelefono(std::string);
+        void setBanco(std::string);
+        std::string getNombreTitular();
+        std::string getNumTelefono();
+        std::string getBanco();
+        void insertarIngreso(float, std::string, std::string, std::string);
+        void insertarEgreso(float, std::string, std::string, std::string);
         void agregarIngreso();
         void agregarEgreso();
-        void crearEjemploIngresos();
-        void crearEjemploEgresos();
+        void mostrarDatosIngresos();
+        void mostrarDatosEgresos();
+        void mostrarDatosUsuario();
         void mostrarIngreso();
         void mostrarEgreso();
         void calcularPresupuesto();
-
 };
+
+Presupuesto::Presupuesto(){
+    nombre_titular = "";
+    banco = "";
+    num_telefono = "";
+}
+void Presupuesto::setNombreTitular(std::string n){
+    nombre_titular = n;
+}
+void Presupuesto::setBanco(std::string b){
+    banco = b;
+}
+void Presupuesto::setNumTelefono(std::string tel){
+    num_telefono = tel;
+}
+std::string Presupuesto::getNombreTitular(){
+    return nombre_titular;
+}
+std::string Presupuesto::getBanco(){
+    return banco;
+}
+std::string Presupuesto::getNumTelefono(){
+    return num_telefono;
+}
 
 void Presupuesto::agregarIngreso(){
 
     float _ctd;
-    char opcion;
-    bool fijo = false;
+    std::string fecha;
     std::string fuente;
+    std::string detalles;
 
     std::cout << "Ingrese la cantidad que se ha ganado: "<< std::endl;
     std::cin >> _ctd;
+    std::cout << "Ingrese la fecha que se ha generado el ingreso: "<< std::endl;
+    std::cin >> fecha;
     std::cout << "Ingrese la fuente del ingreso: "<< std::endl;
     std::cin >> fuente;
+    std::cout << "Ingrese detalles de la transaccion: "<< std::endl;
+    std::cin >> detalles;
 
-    Ingreso ingreso(_ctd, fuente);
-    ingresos[ctdIngresos] = ingreso;
-    ctdIngresos++;
-
-    
+    Ingreso ingreso(_ctd, fecha, detalles, fuente);
+    ingresos[ctd_ingresos] = ingreso;
+    suma_ingresos+=_ctd;
+    ctd_ingresos++;
 }
 
 void Presupuesto::agregarEgreso(){
 
     float _ctd;
-    char opcion;
-    bool fijo = false;
+    std::string fecha;
     std::string fuente;
+    std::string detalles;
 
-    std::cout << "Ingrese la cantidad que se ha gastado: "<< std::endl;
+    std::cout << "Ingrese la cantidad gastada: "<< std::endl;
     std::cin >> _ctd;
-    std::cout << "Ingrese el motivo del gasto: "<< std::endl;
-    std::cin >> fuente;
-    std::cout << "El gasto es fijo? s/n: "<< std::endl;
-    std::cin >> opcion;
+    std::cout << "Ingrese la fecha que se ha generado la transaccion: "<< std::endl;
+    std::cin >> fecha;
+    std::cout << "Ingrese el motivo de compra: "<< std::endl;
+    std::cin.ignore(1, '\n');
+    std::getline(std::cin, fuente);
+    std::cout << "Ingrese detalles de la transaccion: "<< std::endl;
+    std::cin.ignore(1, '\n');
+    std::getline(std::cin, detalles);
 
-    if(opcion == 's'){
-        fijo = true;
+    Egreso egreso(_ctd, fecha, detalles, fuente);
+    egresos[ctd_egresos] = egreso;
+    suma_egresos+=_ctd;
+    ctd_egresos++;
+
+}
+
+void Presupuesto::insertarIngreso(float m, std::string f, std::string d, std::string r){
+    Ingreso ingreso(m, f, d, r);
+    ingresos[ctd_ingresos] = ingreso;
+    suma_ingresos+=m;
+    ctd_ingresos++;
+}
+
+void Presupuesto::insertarEgreso(float m, std::string f, std::string d, std::string r){
+    Egreso egreso(m, f, d, r);
+    egresos[ctd_egresos] = egreso;
+    suma_egresos+=m;
+    ctd_egresos++;
+}
+
+void Presupuesto::mostrarDatosIngresos(){
+    for(int i = 0; i < ctd_ingresos ; i++){
+        std::cout << "***************************************"<<std::endl;
+        ingresos[i].reporte();
     }
-
-    Egreso egreso(_ctd, fuente, fijo);
-    egresos[ctdEgresos] = egreso;
-    ctdEgresos++;
-
 }
-
-void Presupuesto::insertarIngreso(float f, std::string s){
-    Ingreso ingreso(f, s);
-    ingresos[ctdIngresos] = ingreso;
-    ctdIngresos++;
-}
-
-void Presupuesto::insertarEgreso(float f, std::string s, bool b){
-    Egreso egreso(f, s, b);
-    egresos[ctdEgresos] = egreso;
-    ctdEgresos++;
-}
-
-void Presupuesto::crearEjemploIngresos(){
-
-    Presupuesto::insertarIngreso(10000, "Salario");
-    Presupuesto::insertarIngreso(1000, "Asesorías de programacion");
-
-}
-void Presupuesto::crearEjemploEgresos(){
-
-    Presupuesto::insertarEgreso(500, "Recibo de luz", true);
-    Presupuesto::insertarEgreso(150, "Recibo de agua", true);
-    Presupuesto::insertarEgreso(350, "Mochila nueva", false);
-
-}
-void Presupuesto::mostrarEgreso(){
-
-    for(int i = 0; i < ctdEgresos; i++){
-        suma_egresos += egresos[i].getGasto();
+void Presupuesto::mostrarDatosEgresos(){
+    for(int i = 0; i < ctd_egresos ; i++){
+       std::cout << "***************************************"<<std::endl;
+       std::cout << egresos[i].reporte();
     }
-
-    std::cout << "El gasto total para este mes es: " << suma_egresos << std::endl;
-
-    for(int i = 0; i < ctdEgresos; i++){
-        if(egresos[i].isFijo()){
-            egresos_siguiente_mes += egresos[i].getGasto();
-        }
-    }
-
-    std::cout << "El gasto total estimado para el siguiente mes es de al menos: " << egresos_siguiente_mes << std::endl;
-
+}
+void Presupuesto::mostrarDatosUsuario(){
+    std::cout << "Nombre: " << nombre_titular << "\nBanco: " << banco << "\nTelefono: " << num_telefono << std::endl;
+    std::cout << "***************************************" <<std::endl;
 }
 void Presupuesto::mostrarIngreso(){
-
-    for(int i = 0; i < ctdIngresos; i++){
-        suma_ingresos += ingresos[i].getGanancia();
-    }
-
+    std::cout << "El ingreso total es: " << suma_ingresos << std::endl;
+}
+void Presupuesto::mostrarEgreso(){
+    std::cout << "El gasto total es: " << suma_ingresos << std::endl;
 }
 void Presupuesto::calcularPresupuesto(){
 
     std::cout << "El presupuesto para este mes es de "<<suma_ingresos-suma_egresos << " pesos." <<std::endl;
 
 }
+#endif
