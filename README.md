@@ -1,4 +1,5 @@
 
+
 # Descripción
 El presente programa es un administrador de ingresos y egresos, cuyo principal objetivo es ayudar al usuario a conocer el presupuesto aproximado que tendrá por cada cuenta bancaria que sea definida por el usuario, y así tener un control del gasto de dinero para realizar el ahorro que crea necesario hacer.
 Su funcionamiento busca ser similar al de Paypal, ya como se hizo referencia, tiene la posibilidad de tener distintas cuentas bancarias en un solo lugar, y por cada cuenta, almacenar a un titular (persona que posee la cuenta), un número de teléfono y el banco al que pertenece la cuenta, y por cada cuenta se permite agregar nuevos ingresos y egresos (hasta 100 en total contando ambos).
@@ -31,3 +32,10 @@ Este deberá ser un númer entre 0 y 9 para las capacidades actuales del program
 - Si solamente hay una cuenta agregada, al intentar utilizar la opción para cambiar de cuentas se desplegará un pequeño mensaje de error que indica que no es posible, ya que no hay otra cuenta a la que moverse. 
 - El número máximo de cuentas de 100 (no seconsidera que más cuentas sean necesarias).
 - Como lo indica el programa, para terminar su proceso, ingrese un valor de "0" para finalizar su ejecución.
+- El formato de fecha recomendado es DD/MM/YYYY
+
+# Correcciones 😅
+
+ 1. Se arregló el problema que el programa tenía al ejecutarse. Este era ocasionado por un exceso de elementos declarados en el arreglo de cuentas, por lo tanto, debería poder compilarse y ejecutarse como cualquier otro archivo de tipo .cpp. Sin embargo, el programa ejecutaba en mi dispositivo, más no en el de otras personas. Por ello, solicito que se me comente en caso de presentarse nuevas fallas en la ejecución.
+ 2. Se hicieron correcciones a varios errores que había en el diagrama UML para que sea más acorde a la funcionalidad que el programa asegura tener.
+ 3. Se hizo una documentación al código del programa, esperando retroalimentación de la misma.
