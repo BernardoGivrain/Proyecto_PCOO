@@ -72,7 +72,7 @@ int main(){
             * 
             */
             case '1':{
-                if(num_cuentas > 0){
+                if(num_cuentas > 1){
                     std::cout << "N. de cuentas disponibles: " << num_cuentas <<std::endl;
                         for(int i = 0; i < num_cuentas; i++){
                             std::cout << (i+1) << "."<< std::endl;
@@ -85,6 +85,7 @@ int main(){
                 else{
                     std::cout << "Lo sentimos, no hay otras cuentas que mostrar :(" << std::endl;
                 }
+                break;
             }
 
             //En este segundo caso, se muestran los datos de todos los egresos de la cuenta.
