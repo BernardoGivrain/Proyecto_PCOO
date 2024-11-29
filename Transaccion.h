@@ -26,14 +26,18 @@ class Transaccion{
         std::string fecha;
         std::string descripcion;
     public:
+    //Constructores
         Transaccion();
         Transaccion(float m, std::string s, std::string d): monto(m), fecha(s),descripcion(d){};
+
+    //Getters y setters
         void setMonto(float);
         void setFecha(std::string);
         void setDescripcion(std::string);
         float getMonto();
         std::string getFecha();
         std::string getDescripcion();
+        
         std::string reporte();
 
 };

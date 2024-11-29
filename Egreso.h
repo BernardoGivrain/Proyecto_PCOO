@@ -19,8 +19,6 @@
 #include "Transaccion.h"
 #include<string>
 
-
-
 class Egreso: public Transaccion{
 
     private:
@@ -28,12 +26,15 @@ class Egreso: public Transaccion{
         std::string  metodo_pago;
     
     public:
+    //Constructores
         Egreso();
         Egreso(float, std::string, std::string, std::string);
+
+    //Getters y setters
         void setMetodoPago(std::string);
         std::string getMetodoPago();
+
         std::string reporte();
-        
 };
 
 /**
@@ -52,7 +53,7 @@ Egreso::Egreso(): Transaccion(){
  * @param float m: monto gastado, string s: fecha de la transacción, string d:descripcion de la transaccion,string r: metodo de pago
  * @return objeto Egreso
 */
-Egreso::Egreso(float m, std::string s, std::string d, std::string r) : Transaccion(m, s, d){
+Egreso::Egreso(float m, std::string f, std::string d, std::string r) : Transaccion(m, f, d){
     metodo_pago = r;
 }
 
@@ -81,10 +82,10 @@ std::string Egreso::getMetodoPago(){
  *
  * @param 
  * @return string: regresa un valor string que contiene todos los atributos del objeto en 
- * un formato más legible
+ * un formato más legible que incluye el método de pago.
 */
 std::string Egreso::reporte(){
-        return "Monto << "+std::to_string(monto) + "\nFecha << "+ fecha + "\nDescripcion << "+descripcion + "\nDetalles de la transaccion: << " + metodo_pago + "\n"; 
+        return "Monto << "+std::to_string(monto) + "\nFecha << "+ fecha + "\nDescripcion << "+descripcion + "\nMetodo de pago: << " + metodo_pago + "\n"; 
 }
 
 

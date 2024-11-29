@@ -34,16 +34,19 @@ class Presupuesto{
 
         //Constructor con parametros
         Presupuesto(std::string nombre, std::string empresa, std::string telefono) : nombre_titular(nombre), banco(empresa), num_telefono(telefono){};
+
+        //Getters y Setters
         void setNombreTitular(std::string);
         void setNumTelefono(std::string);
         void setBanco(std::string);
         std::string getNombreTitular();
         std::string getNumTelefono();
         std::string getBanco();
+
         void insertarIngreso(float, std::string, std::string, std::string);
         void insertarEgreso(float, std::string, std::string, std::string);
-        void mostrarDatosIngresos();
         void mostrarDatosEgresos();
+        void mostrarDatosIngresos();
         void mostrarDatosUsuario();
         void mostrarIngreso();
         void mostrarEgreso();
@@ -55,7 +58,7 @@ class Presupuesto{
  *
  * @param 
  * @return objeto Presupuesto
-*/
+ */
 Presupuesto::Presupuesto(){
     nombre_titular = "";
     banco = "";
@@ -67,7 +70,7 @@ Presupuesto::Presupuesto(){
  *
  * @param string n: nombre del titular de la cuenta
  * @return
-*/
+ */
 void Presupuesto::setNombreTitular(std::string n){
     nombre_titular = n;
 }
@@ -81,6 +84,7 @@ void Presupuesto::setNombreTitular(std::string n){
 void Presupuesto::setBanco(std::string b){
     banco = b;
 }
+
 /**
  * setter telefono
  *
@@ -106,7 +110,7 @@ std::string Presupuesto::getNombreTitular(){
  *
  * @param 
  * @return string banco: nombre del banco al que pertenece la cuenta: 
-*/
+ */
 std::string Presupuesto::getBanco(){
     return banco;
 }
@@ -126,15 +130,14 @@ std::string Presupuesto::getNumTelefono(){
  *y guardarlo dentro del arreglo de dicha clase
  */
 void Presupuesto::insertarIngreso(float m, std::string f, std::string d, std::string r){
-    Ingreso ingreso(m, f, d, r);
-    ingresos[ctd_ingresos] = ingreso;
+    ingresos[ctd_ingresos] = Ingreso(m, f, d, r);
     suma_ingresos+=m;
     ctd_ingresos++;
 }
 
 /*
- *Solicita varios parámetros que permitan crear un egreso 
- *y guardarlo dentro del arreglo de dicha clase
+ * Solicita varios parámetros que permitan crear un egreso 
+ * y guardarlo dentro del arreglo de dicha clase
  */
 
 /*
@@ -145,8 +148,7 @@ void Presupuesto::insertarIngreso(float m, std::string f, std::string d, std::st
  * @return  
 */
 void Presupuesto::insertarEgreso(float m, std::string f, std::string d, std::string r){
-    Egreso egreso(m, f, d, r);
-    egresos[ctd_egresos] = egreso;
+    egresos[ctd_egresos] = Egreso(m, f, d, r);
     suma_egresos+=m;
     ctd_egresos++;
 }
@@ -206,7 +208,7 @@ void Presupuesto::mostrarIngreso(){
  * @return 
 */
 void Presupuesto::mostrarEgreso(){
-    std::cout << "El gasto total es: " << suma_ingresos << std::endl;
+    std::cout << "El gasto total es: " << suma_egresos << std::endl;
 }
 
 /*
@@ -217,7 +219,7 @@ void Presupuesto::mostrarEgreso(){
 */
 void Presupuesto::calcularPresupuesto(){
 
-    std::cout << "El presupuesto para este mes es de "<<suma_ingresos-suma_egresos << " pesos." <<std::endl;
+    std::cout << "El presupuesto de esta cuenta es de: "<<suma_ingresos-suma_egresos << " pesos." <<std::endl;
 
 }
 #endif
